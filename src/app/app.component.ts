@@ -21,7 +21,7 @@ export class AppComponent {
     '9',
     '.',
   ];
-  operatorArray = ['+', '-', 'x', '/'];
+  operatorArray = ['+', '-', '*', '/'];
   expression: string[] = [];
   operatorClicked = false;
   negativeAdded = false;
@@ -47,10 +47,12 @@ export class AppComponent {
   }
 
   equals() {
-    if (this.operatorClicked) this.expression.pop();
-    this.negativeAdded = false;
-    this.display = this.evalExpression();
-    this.expression = [this.display];
+    if (this.expression.length > 0) {
+      if (this.operatorClicked) this.expression.pop();
+      this.negativeAdded = false;
+      this.display = this.evalExpression();
+      this.expression = [this.display];
+    }
   }
 
   addToNumber(val: string) {
@@ -88,7 +90,6 @@ export class AppComponent {
     }
     if (this.operatorClicked) this.expression.pop();
     this.operatorClicked = true;
-    if (val == 'x') val = '*';
     this.expression.push(val);
     this.negativeAdded = false;
   }
